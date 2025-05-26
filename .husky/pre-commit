@@ -1,2 +1,4 @@
+#!/bin/sh
 npx pretty-quick --staged
-npm run lint
+node scripts/lint-staged.cjs
+
