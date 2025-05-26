@@ -1,4 +1,5 @@
 #!/bin/sh
 npx pretty-quick --staged
 node scripts/lint-staged.cjs
+npx tsc --noEmit --project ./tsconfig.app.json
 
