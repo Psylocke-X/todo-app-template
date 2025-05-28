@@ -1,0 +1,67 @@
+@use "./variables/texts" as *;
+@import "normalize.css";
+
+:root {
+  --ui-font-main: #{"" + $font-inter};
+  --ui-font-play: #{"" + $font-play};
+
+  --color-dark: #0d0714;
+  --color-white: #ffffff;
+  --color-gray: #777777;
+  --color-purple: #9e78cf;
+  --color---purple-dark: #3e1671;
+  --color-turquoise: #78cfb0;
+
+  --border-radius: 10px;
+
+  --border-primary: 1px solid var(--color---purple-dark);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-dark);
+  color: var(--color-white);
+
+  font-family: var(--ui-font-main);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
