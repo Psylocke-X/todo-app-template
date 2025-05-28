@@ -12,9 +12,9 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-          @use "${path.resolve(__dirname, "src/styles/variables/texts.scss")}" as *;
-          @use "${path.resolve(__dirname, "src/styles/mixins/index.scss")}" as *;
-        `,
+        @use "@/styles/variables/index.scss" as *;
+        @use "@/styles/mixins/index.scss" as *;
+      `,
       },
     },
   },
