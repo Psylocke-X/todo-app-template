@@ -1,10 +1,9 @@
+@use "./mixins/font-face" as *;
+@use "./variables/texts" as *;
+
 @include font-face(
   "Inter",
-  "#{$assetsUrl}assets/fonts/Inter-Regular",
+  "@/assets/fonts/Inter-Regular",
   $font-weight-regular
 );
-@include font-face(
-  "Play",
-  "#{$assetsUrl}assets/fonts/Play-Regular",
-  $font-weight-regular
-);
+@include font-face("Play", "@/assets/fonts/Play-Regular", $font-weight-regular);
