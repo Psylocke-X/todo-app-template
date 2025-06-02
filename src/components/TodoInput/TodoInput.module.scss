@@ -1,0 +1,19 @@
+.input {
+  width: 100%;
+  padding: 10px 15px;
+  border: var(--border-primary);
+  border-radius: var(--border-radius);
+
+  background-color: transparent;
+  color: var(--color-white);
+
+  transition: var(--transition);
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-gray);
+  }
+}
