@@ -1,7 +1,21 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.title {
+  font-family: var(--ui-font-play);
+}
+
 .list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 
   list-style: none;
+
+  &--active {
+    flex-direction: column-reverse;
+  }
 }
