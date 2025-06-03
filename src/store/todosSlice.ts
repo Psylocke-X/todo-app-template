@@ -6,6 +6,7 @@ interface Todo {
   id: string;
   text: string;
   completed: boolean;
+  completedAt: string | null;
 }
 
 const initialState: Todo[] = [];
@@ -19,6 +20,7 @@ export const todosSlice = createSlice({
         id: uuidv4(),
         text: action.payload,
         completed: false,
+        completedAt: null,
       });
     },
     deleteTodo: (state, action: PayloadAction<{ id: string }>) => {
@@ -28,6 +30,11 @@ export const todosSlice = createSlice({
       const todo = state.find((t) => t.id === action.payload.id);
       if (todo) {
         todo.completed = !todo.completed;
+        if (todo.completed) {
+          todo.completedAt = new Date().toISOString();
+        } else {
+          todo.completedAt = null;
+        }
       }
     },
   },

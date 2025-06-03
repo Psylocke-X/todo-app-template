@@ -14,4 +14,8 @@
   gap: 16px;
 
   list-style: none;
+
+  &--active {
+    flex-direction: column-reverse;
+  }
 }

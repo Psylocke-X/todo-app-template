@@ -6,6 +6,7 @@ import {
   selectCompletedTodos,
   selectUncompletedTodos,
 } from "@/store/todoSelectors.ts";
+import clsx from "clsx";
 
 import styles from "./TodoList.module.scss";
 
@@ -36,7 +37,7 @@ const TodoList: FC<TodoListProps> = (props) => {
         <p className={styles.title}>
           {title} {todos.length}
         </p>
-        <ul className={styles.list}>
+        <ul className={clsx(styles.list, styles[`list--${filter}`])}>
           {todos.map((todo) => (
             <TodoItem
               key={todo.id}
