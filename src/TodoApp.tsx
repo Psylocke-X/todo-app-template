@@ -7,7 +7,8 @@ const TodoApp = () => {
   return (
     <div className="main">
       <AddTodo />
-      <TodoList />
+      <TodoList title={"Список дел -"} filter={"active"} />
+      <TodoList title={"Завершено -"} filter={"completed"} />
     </div>
   );
 };
