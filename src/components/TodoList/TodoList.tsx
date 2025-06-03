@@ -1,12 +1,11 @@
 import type { FC } from "react";
 
 import TodoItem from "@/components/TodoItem/TodoItem.tsx";
-import type { RootState } from "@/store/store";
+import { useAppSelector } from "@/hooks.ts";
 import {
   selectCompletedTodos,
   selectUncompletedTodos,
 } from "@/store/todoSelectors.ts";
-import { useSelector } from "react-redux";
 
 import styles from "./TodoList.module.scss";
 
@@ -18,7 +17,7 @@ interface TodoListProps {
 const TodoList: FC<TodoListProps> = (props) => {
   const { filter, title } = props;
 
-  const todos = useSelector((state: RootState) => {
+  const todos = useAppSelector((state) => {
     switch (filter) {
       case "completed":
         return selectCompletedTodos(state);
