@@ -38,7 +38,10 @@ const AddTodo: FC = () => {
     <form className={styles.form} onSubmit={handleSubmit(submit, error)}>
       <TodoInput
         type="text"
-        {...register("text", { required: true })}
+        {...register("text", {
+          required: true,
+          validate: (value) => value.trim() !== "",
+        })}
         placeholder="Новая задача"
       />
       <AddButton disabled={!isValid} />
