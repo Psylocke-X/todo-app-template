@@ -1,12 +1,15 @@
+import { useRef } from "react";
 import type { FC } from "react";
 
 import TodoItem from "@/components/TodoItem/TodoItem.tsx";
-import { useAppSelector } from "@/hooks.ts";
+import { useAppDispatch, useAppSelector } from "@/hooks.ts";
 import {
   selectCompletedTodos,
   selectUncompletedTodos,
 } from "@/store/todoSelectors.ts";
+import { toggleCompleted } from "@/store/todosSlice.ts";
 import clsx from "clsx";
+import { useDrop } from "react-dnd";
 
 import styles from "./TodoList.module.scss";
 
@@ -17,6 +20,8 @@ interface TodoListProps {
 
 const TodoList: FC<TodoListProps> = (props) => {
   const { filter, title } = props;
+  const dispatch = useAppDispatch();
+  const ref = useRef<HTMLDivElement>(null);
 
   const todos = useAppSelector((state) => {
     switch (filter) {
@@ -28,12 +33,23 @@ const TodoList: FC<TodoListProps> = (props) => {
         return state.todos;
     }
   });
+  const [, dropRef] = useDrop({
+    accept: "todo",
+    drop: (item: { id: string }) => {
+      if (filter === "completed") {
+        dispatch(toggleCompleted({ id: item.id }));
+      } else if (filter === "active") {
+        dispatch(toggleCompleted({ id: item.id }));
+      }
+    },
+  });
+  dropRef(ref);
 
   if (todos.length === 0) return null;
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} ref={ref}>
         <p className={styles.title}>
           {title} {todos.length}
         </p>
