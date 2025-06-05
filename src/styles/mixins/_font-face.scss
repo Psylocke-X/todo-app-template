@@ -1,9 +1,12 @@
 // =============================================================================
 // String Replace
 // =============================================================================
+@use "sass:string";
+@use "sass:map";
+@use "sass:list";
 
 @function str-replace($string, $search, $replace: "") {
-  $index: str-index($string, $search);
+  $index: string.index($string, $search);
 
   @if $index {
     @return str-slice($string, 1, $index - 1) + $replace +
@@ -42,20 +45,21 @@
 
   @each $ext in $exts {
     $extmod: if(
-      map-has-key($extmods, $ext),
-      $ext + map-get($extmods, $ext),
+      map.has-key($extmods, $ext),
+      $ext + map.get($extmods, $ext),
       $ext
     );
-    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-    $src: append(
+    $format: if(map.has-key($formats, $ext), map.get($formats, $ext), $ext);
+    $src: list.append(
       $src,
-      url(quote($path + "." + $extmod)) format(quote($format)),
+      url(#{ string.quote($path + "." + $extmod)})
+        format(string.quote($format)),
       comma
     );
   }
 
   @font-face {
-    font-family: quote($name);
+    font-family: string.quote($name);
     font-style: $style;
     font-display: swap;
     font-weight: $weight;
