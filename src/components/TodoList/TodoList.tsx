@@ -33,7 +33,7 @@ const TodoList: FC<TodoListProps> = (props) => {
         return state.todos;
     }
   });
-  const [, dropRef] = useDrop({
+  const [{ isOver, canDrop }, dropRef] = useDrop({
     accept: "todo",
     drop: (item: { id: string }) => {
       if (filter === "completed") {
@@ -42,27 +42,34 @@ const TodoList: FC<TodoListProps> = (props) => {
         dispatch(toggleCompleted({ id: item.id }));
       }
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
   });
   dropRef(ref);
 
-  if (todos.length === 0) return null;
-
   return (
     <>
-      <div className={styles.wrapper} ref={ref}>
+      <div
+        className={clsx(styles.wrapper, isOver && canDrop && styles.dropTarget)}
+        ref={ref}
+      >
         <p className={styles.title}>
           {title} {todos.length}
         </p>
-        <ul className={clsx(styles.list, styles[`list--${filter}`])}>
-          {todos.map((todo) => (
-            <TodoItem
-              key={todo.id}
-              id={todo.id}
-              text={todo.text}
-              completed={todo.completed}
-            />
-          ))}
-        </ul>
+        {todos.length > 0 && (
+          <ul className={clsx(styles.list, styles[`list--${filter}`])}>
+            {todos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                id={todo.id}
+                text={todo.text}
+                completed={todo.completed}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
